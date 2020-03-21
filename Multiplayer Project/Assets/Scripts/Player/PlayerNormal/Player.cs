@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
 
     public int ID;
@@ -19,17 +20,14 @@ public class Player : MonoBehaviour
 
     public bool isGameMaker;
 
-    private void Awake()
+    public override void OnStartLocalPlayer ()
     {
         gameObject.AddComponent<PlayerMovement>();
         gameObject.AddComponent<Grounded>();
         PColor = GetComponent<SpriteRenderer>();
         txt = GetComponentInChildren<Text>();
         GMDrag = GetComponent<GMDrag>();
-    }
 
-    void Start()
-    {
         //Chama o void AddPlayer e adiciona um ID e contagem de players para o GameManager
         GameManager.instance.AddPlayer(this);
         //Adiciona o player a Lista de Players
