@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3372320909964929760}
   - component: {fileID: 3372320909964929759}
   - component: {fileID: 6593460610189703705}
+  - component: {fileID: 1576706533945731359}
+  - component: {fileID: -2169743450908412551}
   m_Layer: 8
   m_Name: jump_plataform_up_0
   m_TagString: Ground
@@ -186,9 +188,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00621e680ca98745bb0d03e205a9433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: 0
-  snapToGrid: 0
   isDraggable: 1
-  isDragged: 0
-  smartDrag: 1
-  move: {fileID: 0}
+  isMoving: 0
+--- !u!114 &1576706533945731359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372320909964929754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+--- !u!114 &-2169743450908412551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372320909964929754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 1

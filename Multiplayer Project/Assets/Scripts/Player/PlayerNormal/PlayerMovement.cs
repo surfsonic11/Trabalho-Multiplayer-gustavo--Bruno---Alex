@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     private float h, v;
 
@@ -25,20 +26,28 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer sprite;
 
+    private Material cachedMaterial;
+
+    [SyncVar(hook = "SetColor")] private Color playerColor;
+
+    public Color PlayerColor { set { playerColor = value; } }
+
     public float baseSpeed;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        Movement();
+        if (!isLocalPlayer)
+            return;
 
+        Movement();
     }
 
     private void Movement()
@@ -76,6 +85,40 @@ public class PlayerMovement : MonoBehaviour
             sprite.flipX = false;
         }
         
+    }
+
+    public void ChangeColor(Color _color)
+    {
+        playerColor = _color;
+    }
+
+    private void SetColor(Color oldColor, Color newColor)
+    {
+        if (cachedMaterial == null)
+        {
+            cachedMaterial = sprite.material;
+        }
+
+        cachedMaterial.color = newColor;
+    }
+
+    private Color RandomColor()
+    {
+        Color randomColor;
+
+        randomColor = new Color
+            (
+                Random.Range(.0f, 1f), Random.Range(.0f, 1f), Random.Range(.0f, 1f)
+            );
+
+        return randomColor;
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        playerColor = RandomColor();
     }
 
 

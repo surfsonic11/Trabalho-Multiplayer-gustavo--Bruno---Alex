@@ -6,7 +6,9 @@ using Mirror;
 public class State : NetworkBehaviour
 {
     protected GameManager Manager { get { return GameManager.instance; } }
-    protected UIManager UIM { get { return UIManager.instance; } }
+    protected UXManager UIM { get { return UXManager.instance; } }
+
+    
     public virtual void Enter()
     {
 

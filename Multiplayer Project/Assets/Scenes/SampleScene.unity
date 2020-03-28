@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 66934902}
   - component: {fileID: 66934905}
   - component: {fileID: 66934904}
-  - component: {fileID: 66934906}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -262,21 +261,6 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
---- !u!114 &66934906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 66934901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showGUI: 1
-  offsetX: 1
-  offsetY: 1
 --- !u!1 &74453181
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,8 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30643b22e5010f548a42b59234dcb55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!227 &229626601
 BillboardRenderer:
   m_ObjectHideFlags: 0
@@ -723,8 +705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30643b22e5010f548a42b59234dcb55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!227 &644643026
 BillboardRenderer:
   m_ObjectHideFlags: 0
@@ -1578,8 +1558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30643b22e5010f548a42b59234dcb55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!227 &1721544202
 BillboardRenderer:
   m_ObjectHideFlags: 0
@@ -2080,7 +2058,7 @@ GameObject:
   - component: {fileID: 1943506148}
   m_Layer: 0
   m_Name: 800px-Red_flag.svg
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

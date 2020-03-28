@@ -10,7 +10,7 @@ public class Spring : MonoBehaviour
 
     public GameObject bouncer;
 
-    public SpriteRenderer sRender;
+    //public SpriteRenderer sRender;
 
     
 
@@ -18,7 +18,7 @@ public class Spring : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        sRender = GetComponent<SpriteRenderer>();
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -64,17 +64,17 @@ public class Spring : MonoBehaviour
         bouncer.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
-    public void FlipX(bool flipx)
-    {
-        if (flipx == false)
-        {
-            sRender.flipX = false;
-            velocity.x = velocity.x * -1;
-        }
-        else
-        {
-            sRender.flipX = true;
-            velocity.x = velocity.x * -1;
-        }
-    }
+    //public void FlipX(bool flipx)
+    //{
+    //    if (flipx == false)
+    //    {
+    //        sRender.flipX = false;
+    //        velocity.x = velocity.x * -1;
+    //    }
+    //    else
+    //    {
+    //        sRender.flipX = true;
+    //        velocity.x = velocity.x * -1;
+    //    }
+    //}
 }

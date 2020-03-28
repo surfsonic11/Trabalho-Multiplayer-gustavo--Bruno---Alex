@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class Gameplay : State
 {
@@ -8,9 +9,11 @@ public class Gameplay : State
     public override void Enter()
     {
         base.Enter();
-        TeleportWait();
+
+        Debug.Log("Gemaplys começou");
+        //TeleportWait();
         SortItens();
-        GameMakerOn();
+        
     }
 
     void TeleportWait()
@@ -31,13 +34,14 @@ public class Gameplay : State
     }
 
      public void Win()
-    {
+     {
         Debug.Log("AYAYAYAYAY");
         Manager.SortNum++;
         Manager.PlayerGM();
         TrocaGM();
-    }
+     }
 
+    
     void SortItens()
     {
         Manager.Item1 = Random.Range(0, 6);
@@ -45,24 +49,9 @@ public class Gameplay : State
         Manager.Item3 = Random.Range(0, 6);
     }
 
-    void GameMakerOn()
-    {
-        for (int i = 0; i < Manager.Itens.Length; i++)
-        {
-            if (Manager.Item1 == i)
-            {
-                Instantiate(Manager.Itens[i], Manager.ItensSpawn[0].transform.position, transform.rotation);
-            }
-            else if (Manager.Item2 == i)
-            {
-                Instantiate(Manager.Itens[i], Manager.ItensSpawn[1].transform.position, transform.rotation);
-            }
-            else if (Manager.Item3 == i)
-            {
-                Instantiate(Manager.Itens[i], Manager.ItensSpawn[2].transform.position, transform.rotation);
-            }
-        }
-    }
+    
+     
+    
 
     public void TestGamePlay()
     {
@@ -76,9 +65,7 @@ public class Gameplay : State
                 Manager.playerQ[i].GetComponent<GMDrag>().enabled = false;
             }
             
-        }
-        UIM.TestGamePlay.gameObject.SetActive(false);
-        UIM.StopTest.gameObject.SetActive(true);
+        }       
     }
 
     public void StopTest()
@@ -90,10 +77,7 @@ public class Gameplay : State
                 Manager.playerQ[i].transform.position = Manager.spawn[0].transform.position;
                 Manager.playerQ[i].GetComponent<GMDrag>().enabled = true;
             }
-        }
-
-        UIM.StopTest.gameObject.SetActive(false);
-        UIM.TestGamePlay.gameObject.SetActive(true);
+        }       
     }
 
     public void Gemaplys()
@@ -112,17 +96,13 @@ public class Gameplay : State
                     Win();
                 }
             }
-        }
-        UIM.TestGamePlay.gameObject.SetActive(false);
-        UIM.PlayGamePlay.gameObject.SetActive(false);
+        }        
     }
 
     void TrocaGM()
     {
         TeleportWait();
         SortItens();
-        GameMakerOn();
-        UIM.TestGamePlay.gameObject.SetActive(true);
     }
 
     public override void Exit()

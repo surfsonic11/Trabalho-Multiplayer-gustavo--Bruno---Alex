@@ -32,7 +32,7 @@ public class PlayerDeath : MonoBehaviour
     {
         if (gameObject.tag == "GameMaker")
         {
-            UIManager.instance.TestGamePlay.gameObject.SetActive(true);
+            
             isDead = false;
         }
         gameObject.SetActive(false);

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class GMDrag : MonoBehaviour
+public class GMDrag : NetworkBehaviour
 {
+
     public float gridSize;
     public bool snapToGrid;
     public bool smartDrag = true;
@@ -15,12 +17,19 @@ public class GMDrag : MonoBehaviour
     public SpriteRenderer sFlip;
     [SerializeField]
     GameObject currentObject;
+    private Gameplay gp;
+
+    GameObject t;
 
     Ray ray;
     RaycastHit2D hit;
 
     public LayerMask layerMask;
 
+    private void OnEnable()
+    {
+        CmdItenSpawn();
+    }
 
     private void Start()
     {
@@ -35,7 +44,7 @@ public class GMDrag : MonoBehaviour
             if(isDragged)
             {
                 isDragged = false;
-                sFlip = null;
+                
                 currentObject = null;
             }
             else
@@ -100,30 +109,28 @@ public class GMDrag : MonoBehaviour
         }            
     }
 
-    //void OnMouseUp()
-    //{
-    //    isDragged = false;
-
-    //}
-
-    //private void OnMouseDown()
-    //{
-    //    if (hit.collider.gameObject && Input.GetMouseButtonDown(0))
-    //    {
-    //        if (smartDrag)
-    //        {
-    //            initialMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //            initialObjectPosition = transform.position;
-    //        }
-    //        isDragged = true;
-    //    }
-    //}
-    //void MovePlat()
-    //{
-            
-    //   MovingPlatform movingPlatform = currentObject.GetComponent<MovingPlatform>();
-    //    movingPlatform.nextPos = movingPlatform.startPos.position;
-    //}
+    [Command]
+    public void CmdItenSpawn()
+    {
+        for (int i = 0; i < GameManager.instance.Itens.Length; i++)
+        {
+            if (GameManager.instance.Item1 == i)
+            {
+               t = Instantiate(GameManager.instance.Itens[i], GameManager.instance.ItensSpawn[0].transform.position, transform.rotation);
+                NetworkServer.Spawn(t);
+            }
+            else if (GameManager.instance.Item2 == i)
+            {
+               t = Instantiate(GameManager.instance.Itens[i], GameManager.instance.ItensSpawn[1].transform.position, transform.rotation);
+                NetworkServer.Spawn(t);
+            }
+            else if (GameManager.instance.Item3 == i)
+            {
+               t =  Instantiate(GameManager.instance.Itens[i], GameManager.instance.ItensSpawn[2].transform.position, transform.rotation);
+                NetworkServer.Spawn(t);
+            }
+        }
+    }
 
     void ClickAgain()
     {
@@ -183,34 +190,35 @@ public class GMDrag : MonoBehaviour
 
     private IEnumerator DragCoroutine()
     {
-        while(isDragged)
+        if (isLocalPlayer)
         {
-            hit.transform.position = initialObjectPosition + (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - initialMousePosition;
-            if(hit.collider.gameObject.name == "springside(Clone)" && Input.GetMouseButtonDown(1))
+            while (isDragged)
             {
-
-                sFlip = hit.collider.gameObject.GetComponent<SpriteRenderer>();
-                if(sFlip.flipX == true)
+                hit.transform.position = initialObjectPosition + (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - initialMousePosition;
+                if (hit.collider.gameObject.name == "springside(Clone)" && Input.GetMouseButtonDown(1))
                 {
-                    Debug.Log("oi");
 
-                    hit.collider.gameObject.GetComponent<Spring>().FlipX(false);
+                    //sFlip = hit.collider.gameObject.GetComponent<SpriteRenderer>();
+                    //if(sFlip.flipX == true)
+                    //{
+                    //    Debug.Log("oi");
+
+                    //    hit.collider.gameObject.GetComponent<Spring>().FlipX(false);
+                    //}
+                    //if(sFlip.flipX == false)
+                    //{
+                    //    Debug.Log("merda");
+                    //    hit.collider.gameObject.GetComponent<Spring>().FlipX(true);
+                    //}
                 }
-                if(sFlip.flipX == false)
-                {
-                    Debug.Log("merda");
-                    hit.collider.gameObject.GetComponent<Spring>().FlipX(true);
-                }
+
+                yield return null;
             }
-            
-            yield return null;
+
+            Debug.Log("Soltou o objeto");
         }
-
-        Debug.Log("Soltou o objeto");
     }
+       
 
-    private void OnMouseUp()
-    {
-        
-    }
+
 }
